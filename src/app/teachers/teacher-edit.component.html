@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <form novalidate
+              (ngSubmit)="saveTeacher()"
+              [formGroup]="teacherForm">
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+                for="teacherFirstNameId">First Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                  id="teacherFirstNameId"
+                  type="text"
+                  placeholder="First Name (required)"
+                  formControlName="teacherFirstName"
+                  [ngClass]="{'is-invalid': (teacherForm.get('teacherFirstName').touched || 
+                                             teacherForm.get('teacherFirstName').dirty) && 
+                                             !teacherForm.get('teacherFirstName').valid }"/>
+          <span class="invalid-feedback">
+            <span *ngIf="teacherForm.get('teacherFirstName').errors?.required">
+              The first name is required.
+            </span>
+            <span *ngIf="teacherForm.get('teacherFirstName').errors?.minlength">
+              The name entered is too short.
+            </span>
+            <span *ngIf="teacherForm.get('teacherFirstName').errors?.maxlength">
+              The name entered is too long.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+                for="teacherLastNameId">Last Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                  id="teacherLastNameId"
+                  type="text"
+                  placeholder="Last Name (required)"
+                  formControlName="teacherLastName"
+                  [ngClass]="{'is-invalid': (teacherForm.get('teacherLastName').touched || 
+                                             teacherForm.get('teacherLastName').dirty) && 
+                                             !teacherForm.get('teacherLastName').valid }"/>
+          <span class="invalid-feedback">
+            <span *ngIf="teacherForm.get('teacherLastName').errors?.required">
+              The last name is required.
+            </span>
+            <span *ngIf="teacherForm.get('teacherLastName').errors?.minlength">
+              The last name entered is too short.
+            </span>
+            <span *ngIf="teacherForm.get('teacherLastName').errors?.maxlength">
+              The last name entered is too long.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" 
+                for="teacherDateOfEmploymentId">Date of Employment</label>
+        <div class="input-group col-md-8">
+          <input class="form-control"
+                  id="teacherDateOfEmploymentId"
+                  type="text" 
+                  placeholder="yyyy-mm-dd"
+                  formControlName="teacherDateOfEmployment" 
+                  ngbDatepicker #d="ngbDatepicker"
+                  [maxDate]="maxDate">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+              <fa-icon [icon]="faCalendarAlt"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" 
+                for="teacherDepartmentId">Department</label>
+        <div class="col-md-8">
+          <select class="form-control" formControlName="teacherDepartment">
+            <option [value]="department.id" *ngFor="let department of departments">{{department.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+                for="teacherRatingId">Star Rating (1-5)</label>
+
+        <div class="col-md-8">
+          <input class="form-control"
+                  id="teacherRatingId"
+                  type="text"
+                  placeholder="Rating (1-5)"
+                  formControlName="teacherRating"
+                  [ngClass]="{'is-invalid': (teacherForm.get('teacherRating').touched || 
+                                             teacherForm.get('teacherRating').dirty) && 
+                                             !teacherForm.get('teacherRating').valid }"/>
+          <span class="invalid-feedback">
+            <span *ngIf="teacherForm.get('teacherRating').errors?.range">
+              Rate the product between 1 (lowest) and 5 (highest).
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  style="width:80px;"
+                  type="submit"
+                  [title]="teacherForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!teacherForm.valid">
+            Save
+          </button>
+          <button class="btn btn-outline-secondary mr-3"
+                  style="width:80px;"
+                  type="button"
+                  title="Cancel your edits"
+                  [routerLink]="['/teachers']">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

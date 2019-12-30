@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle + ": " + teacher?.teacherLastName + ", " + teacher?.teacherFirstName}}
+  </div>
+
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-3">First Name:</div>
+          <div class="col-md-6">{{teacher?.teacherFirstName}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Last Name:</div>
+          <div class="col-md-6">{{teacher?.teacherLastName}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Date of Employment:</div>
+          <div class="col-md-6">{{teacher?.teacherDateOfEmployment | date}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Department:</div>
+          <div class="col-md-6">{{teacher?.teacherDepartment.name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">5 Star Rating:</div>
+          <div class="col-md-6">
+            <app-star [rating]="teacher?.teacherRating"></app-star>
+          </div>
+        </div>
+        <br>
+        <div>
+          <div>
+            <button class="btn btn-outline-secondary mr-3"
+                    style="width:80px"
+                    (click)="onBack()"
+                    [routerLink]="['/teachers']">
+              <i class="fa fa-chevron-left"></i> 
+              Back
+            </button>
+            <button class="btn btn-outline-primary mr-3"
+                    style="width:80px"
+                    [routerLink]="['/teachers', teacher?.id, 'edit']">
+              Edit
+            </button>
+            <button class="btn btn-outline-warning"
+              style="width:80px"
+              type="button"
+              title="Delete this teacher"
+              (click)="deleteTeacher()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

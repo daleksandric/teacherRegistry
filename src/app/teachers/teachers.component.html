@@ -1,0 +1,30 @@
+<div class='card'>
+  <div class='card-header'>
+      {{pageTitle}}
+  </div>
+  <div class='card-body'>
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Date of Emplyment</th>
+                      <th>Department</th>
+                      <th>Star Rating</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor='let teacher of teachers'>
+                      <td><a [routerLink]="['/teachers', teacher.id]">{{ teacher.teacherFirstName }}</a></td>
+                      <td>{{ teacher.teacherLastName }}</td>
+                      <td>{{ teacher.teacherDateOfEmployment | date }}</td>
+                      <td>{{ teacher.teacherDepartment.name }}</td>
+                      <td><app-star [rating]='teacher.teacherRating'></app-star></td>
+                  </tr>
+              </tbody>
+          </table>
+          <button class="btn btn-primary" type="button" [routerLink]="['/teachers/0/edit']">New Teacher</button>
+      </div>
+  </div>
+</div>
